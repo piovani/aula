@@ -2,28 +2,27 @@ package main
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"github.com/piovani/aula/shared"
 )
 
 type Student struct {
-	ID       int    `json:"id"`
-	FullName string `json:"full_name"`
-	Age      int    `json:"age"`
+	ID       uuid.UUID `json:"id"`
+	FullName string    `json:"full_name"`
+	Age      int       `json:"age"`
 }
 
 var Students = []Student{
-	Student{ID: 1, FullName: "Joao", Age: 18},
-	Student{ID: 2, FullName: "Gabriel", Age: 19},
+	Student{ID: shared.GetUuid(), FullName: "Joao", Age: 18},
+	Student{ID: shared.GetUuid(), FullName: "Gabriel", Age: 19},
 }
 
 func routeHearth(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "ok",
 	})
-
-	c.Done()
 }
 
 func routeGetStudents(c *gin.Context) {
@@ -41,7 +40,7 @@ func routePosttudent(c *gin.Context) {
 		return
 	}
 
-	student.ID = Students[len(Students)-1].ID + 1
+	student.ID = shared.GetUuid()
 	Students = append(Students, student)
 
 	c.JSON(http.StatusCreated, student)
@@ -60,10 +59,11 @@ func routePuttudent(c *gin.Context) {
 		return
 	}
 
-	id, err := strconv.Atoi(c.Params.ByName("id"))
+	idString := c.Params.ByName("id")
+	id, err := shared.GetUuidByString(idString)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message_error": "Não foi possivel obter o id",
+			"message_error": "Problema com seu id",
 		})
 		return
 	}
@@ -74,7 +74,7 @@ func routePuttudent(c *gin.Context) {
 		}
 	}
 
-	if studentLocal.ID == 0 {
+	if studentLocal.ID == shared.GetUuidEmpty() {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message_error": "Não foi possivel encontrar o estudante",
 		})
@@ -100,11 +100,11 @@ func routePuttudent(c *gin.Context) {
 func routeDeletetudent(c *gin.Context) {
 	var newStudents []Student
 
-	id, err := strconv.Atoi(c.Params.ByName("id"))
+	idString := c.Params.ByName("id")
+	id, err := shared.GetUuidByString(idString)
 	if err != nil {
-
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message_error": "Não foi possivel obter o id",
+			"message_error": "Problema com seu id",
 		})
 		return
 	}
@@ -125,10 +125,11 @@ func routeDeletetudent(c *gin.Context) {
 func routegettudent(c *gin.Context) {
 	var student Student
 
-	id, err := strconv.Atoi(c.Params.ByName("id"))
+	idString := c.Params.ByName("id")
+	id, err := shared.GetUuidByString(idString)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message_error": "Não foi possivel obter o id",
+			"message_error": "Problema com seu id",
 		})
 		return
 	}
@@ -139,7 +140,7 @@ func routegettudent(c *gin.Context) {
 		}
 	}
 
-	if student.ID == 0 {
+	if student.ID == shared.GetUuidEmpty() {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message_error": "Não foi possivel encontrar o estudante",
 		})
