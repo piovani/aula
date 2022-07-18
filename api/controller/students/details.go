@@ -7,6 +7,7 @@ import (
 	"github.com/piovani/aula/api/controller"
 	"github.com/piovani/aula/entites"
 	"github.com/piovani/aula/entites/shared"
+	student_usecase "github.com/piovani/aula/usecase/student"
 )
 
 func Details(c *gin.Context) {
@@ -21,14 +22,9 @@ func Details(c *gin.Context) {
 		return
 	}
 
-	for _, studentElement := range entites.Students {
-		if studentElement.ID == input.UUID {
-			studentFound = studentElement
-		}
-	}
-
-	if studentFound.ID == shared.GetUuidEmpty() {
-		c.JSON(http.StatusBadRequest, controller.NewResponseMessageError("Não foi possivel encontrar o estudante"))
+	studentFound, err = student_usecase.SearchByID(input.UUID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, controller.NewResponseMessageError(err.Error()))
 		return
 	}
 

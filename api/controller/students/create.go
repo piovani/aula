@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/piovani/aula/api/controller"
-	"github.com/piovani/aula/entites"
+	student_usecase "github.com/piovani/aula/usecase/student"
 )
 
 func Create(c *gin.Context) {
@@ -15,8 +15,11 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	student := entites.NewStudent(input.FullName, input.Age)
-	entites.Students = append(entites.Students, *student)
+	student, err := student_usecase.Create(input.FullName, input.Age)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, controller.NewResponseMessageError(err.Error()))
+		return
+	}
 
 	c.JSON(http.StatusAccepted, student)
 }

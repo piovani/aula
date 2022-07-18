@@ -5,13 +5,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/piovani/aula/api/controller"
-	"github.com/piovani/aula/entites"
 	"github.com/piovani/aula/entites/shared"
+	student_usecase "github.com/piovani/aula/usecase/student"
 )
 
 func Delete(c *gin.Context) {
 	var input Input
-	var newStudents []entites.Student
 	var err error
 
 	input.ID = c.Params.ByName("id")
@@ -21,13 +20,10 @@ func Delete(c *gin.Context) {
 		return
 	}
 
-	for _, studentElement := range entites.Students {
-		if studentElement.ID != input.UUID {
-			newStudents = append(newStudents, studentElement)
-		}
+	if err = student_usecase.Delete(input.UUID); err != nil {
+		c.JSON(http.StatusInternalServerError, controller.NewResponseMessageError(err.Error()))
+		return
 	}
-
-	entites.Students = newStudents
 
 	c.JSON(http.StatusOK, controller.NewResponseMessage("Estudante exluido com sucesso"))
 }
