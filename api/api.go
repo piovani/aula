@@ -12,7 +12,7 @@ func NewService() *Service {
 	}
 }
 
-func (s *Service) Start() {
+func (s *Service) Start() error {
 	s.GetRoutes()
-	s.Engine.Run()
+	return s.Engine.Run()
 }
