@@ -1,0 +1,22 @@
+version: "3.9"
+
+volumes:
+  aula-mongo-volume:
+    external: true
+
+networks:
+  aula-network:
+    external: true
+
+services:
+  aula-mongo:
+    container_name: aula-mongo
+    image: mongo:latest
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - aula-mongo-volume:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - aula-network

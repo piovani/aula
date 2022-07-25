@@ -20,3 +20,7 @@ func CheckFatal(err error) {
 		log.Fatal(err)
 	}
 }
+
+func ConnectionDB(ctx context.Context) client {
+	mongo.
+}
