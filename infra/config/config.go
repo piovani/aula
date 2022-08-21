@@ -7,6 +7,9 @@ import (
 
 type Config struct {
 	ApiPort int `envconfig:"API_PORT"`
+
+	MongURL      string `envconfig:"MONGO_URL"`
+	MongDatabase string `envconfig:"MONGO_DATABASE"`
 }
 
 var Env Config

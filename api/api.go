@@ -5,15 +5,19 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/piovani/aula/infra/config"
+	"github.com/piovani/aula/infra/database"
 )
 
 type Service struct {
-	*gin.Engine
+	Engine *gin.Engine
+
+	Database *database.Database
 }
 
-func NewService() *Service {
+func NewService(db *database.Database) *Service {
 	return &Service{
-		gin.Default(),
+		Engine:   gin.Default(),
+		Database: db,
 	}
 }
 
