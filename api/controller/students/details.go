@@ -7,10 +7,9 @@ import (
 	"github.com/piovani/aula/api/controller"
 	"github.com/piovani/aula/entites"
 	"github.com/piovani/aula/entites/shared"
-	student_usecase "github.com/piovani/aula/usecase/student"
 )
 
-func Details(c *gin.Context) {
+func (sc *StudentController) Details(c *gin.Context) {
 	var input Input
 	var err error
 	var studentFound entites.Student
@@ -22,7 +21,7 @@ func Details(c *gin.Context) {
 		return
 	}
 
-	studentFound, err = student_usecase.SearchByID(input.UUID)
+	studentFound, err = sc.StudentUsecase.SearchByID(input.UUID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, controller.NewResponseMessageError(err.Error()))
 		return

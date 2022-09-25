@@ -8,13 +8,10 @@ import (
 	"github.com/piovani/aula/entites/shared"
 )
 
-func Update(id uuid.UUID, fullName string, age int) (student entites.Student, err error) {
-	var newStudents []entites.Student
-
-	for _, studentElemt := range entites.Students {
-		if studentElemt.ID == id {
-			student = studentElemt
-		}
+func (su *StudentUsecase) Update(id uuid.UUID, fullName string, age int) (entites.Student, error) {
+	student, err := su.Database.StudentRepository.FindByID(id)
+	if err != nil {
+		return student, err
 	}
 
 	if student.ID == shared.GetUuidEmpty() {
@@ -24,15 +21,7 @@ func Update(id uuid.UUID, fullName string, age int) (student entites.Student, er
 	student.FullName = fullName
 	student.Age = age
 
-	for _, studentElement := range entites.Students {
-		if student.ID == studentElement.ID {
-			newStudents = append(newStudents, student)
-		} else {
-			newStudents = append(newStudents, studentElement)
-		}
-	}
-
-	entites.Students = newStudents
+	err = su.Database.StudentRepository.Update(&student)
 
 	return student, err
 }

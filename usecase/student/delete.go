@@ -1,20 +1,21 @@
 package student
 
 import (
+	"errors"
+
 	"github.com/google/uuid"
-	"github.com/piovani/aula/entites"
+	"github.com/piovani/aula/entites/shared"
 )
 
-func Delete(id uuid.UUID) (err error) {
-	var newStudents []entites.Student
-
-	for _, studentElement := range entites.Students {
-		if studentElement.ID != id {
-			newStudents = append(newStudents, studentElement)
-		}
+func (su *StudentUsecase) Delete(id uuid.UUID) error {
+	student, err := su.Database.StudentRepository.FindByID(id)
+	if err != nil {
+		return err
 	}
 
-	entites.Students = newStudents
+	if student.ID == shared.GetUuidEmpty() {
+		return errors.New("Não foi possivel encontrar o estudante")
+	}
 
-	return err
+	return su.Database.StudentRepository.Delete(id)
 }

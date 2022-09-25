@@ -4,10 +4,10 @@ import (
 	"github.com/piovani/aula/entites"
 )
 
-func Create(fullName string, age int) (student entites.Student, err error) {
-	pontStudent := entites.NewStudent(fullName, age)
-	student = *pontStudent
-	entites.Students = append(entites.Students, student)
+func (su *StudentUsecase) Create(fullName string, age int) (entites.Student, error) {
+	student := entites.NewStudent(fullName, age)
 
-	return student, err
+	err := su.Database.StudentRepository.Create(student)
+
+	return *student, err
 }

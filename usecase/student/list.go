@@ -4,8 +4,6 @@ import (
 	"github.com/piovani/aula/entites"
 )
 
-func List() (students []entites.Student, err error) {
-	students = entites.Students
-
-	return students, err
+func (su *StudentUsecase) List() ([]entites.Student, error) {
+	return su.Database.StudentRepository.List()
 }
