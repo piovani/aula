@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  aula-app:
+    container_name: aula-app
+    image: golang:1.18
+    volumes:
+      - .:/go/src
+    ports:
+      - 8080:8080
+    command: tail -f "/dev/null"
+  
+  aula-mongo:
+    container_name: aula-mongo
+    image: mongo:5.0.10
+    volumes:
+      - .database:/data/db
+    ports:
+      - 27017:27017
