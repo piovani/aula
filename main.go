@@ -1,19 +1,25 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/piovani/aula/api"
 	"github.com/piovani/aula/infra/config"
+	"github.com/piovani/aula/infra/database"
+	"github.com/piovani/aula/infra/database/mongo"
 )
 
 func main() {
 	var err error
+	ctx := context.TODO()
 
 	err = config.StarConfig()
 	FatalError(err)
 
-	err = api.NewService().Start()
+	db := GetDatabase(ctx)
+
+	err = api.NewService(db).Start()
 	FatalError(err)
 }
 
@@ -21,4 +27,11 @@ func FatalError(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func GetDatabase(ctx context.Context) *database.Database {
+	client, err := mongo.GetConnection(ctx)
+	FatalError(err)
+
+	return database.NewDatabase(client)
 }
