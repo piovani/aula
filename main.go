@@ -8,6 +8,7 @@ import (
 	"github.com/piovani/aula/infra/config"
 	"github.com/piovani/aula/infra/database"
 	"github.com/piovani/aula/infra/database/mongo"
+	"github.com/piovani/aula/infra/database/mongo/repositories"
 )
 
 func main() {
@@ -33,5 +34,7 @@ func GetDatabase(ctx context.Context) *database.Database {
 	client, err := mongo.GetConnection(ctx)
 	FatalError(err)
 
-	return database.NewDatabase(client)
+	studentRepository := repositories.NewStudentRepository(ctx, client)
+
+	return database.NewDatabase(client, studentRepository)
 }

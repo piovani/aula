@@ -6,10 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/piovani/aula/api/controller"
 	"github.com/piovani/aula/entites/shared"
-	student_usecase "github.com/piovani/aula/usecase/student"
 )
 
-func Delete(c *gin.Context) {
+func (sc *StudentController) Delete(c *gin.Context) {
 	var input Input
 	var err error
 
@@ -20,7 +19,7 @@ func Delete(c *gin.Context) {
 		return
 	}
 
-	if err = student_usecase.Delete(input.UUID); err != nil {
+	if err = sc.StudentUsecase.Delete(input.UUID); err != nil {
 		c.JSON(http.StatusInternalServerError, controller.NewResponseMessageError(err.Error()))
 		return
 	}

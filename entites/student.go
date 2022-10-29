@@ -6,9 +6,9 @@ import (
 )
 
 type Student struct {
-	ID       uuid.UUID `json:"id"`
-	FullName string    `json:"full_name"`
-	Age      int       `json:"age"`
+	ID       uuid.UUID `json:"id" bson:"_id"`
+	FullName string    `json:"full_name" bson:"full_name"`
+	Age      int       `json:"age" bson:"age"`
 }
 
 func NewStudent(fullName string, age int) *Student {
@@ -17,6 +17,14 @@ func NewStudent(fullName string, age int) *Student {
 		FullName: fullName,
 		Age:      age,
 	}
+}
+
+type StudentRepository interface {
+	Create(student *Student) error
+	List() ([]Student, error)
+	FindByID(id uuid.UUID) (Student, error)
+	Update(student *Student) error
+	Delete(id uuid.UUID) error
 }
 
 var Students = []Student{
