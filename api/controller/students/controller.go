@@ -5,14 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/piovani/aula/api/controller"
-	student_usecase "github.com/piovani/aula/usecase/student"
+	"github.com/piovani/aula/entites"
 )
 
 type StudentController struct {
-	StudentUsecase *student_usecase.StudentUsecase
+	StudentUsecase entites.StudentUsecaseContract
 }
 
-func NewStudentController(su *student_usecase.StudentUsecase) *StudentController {
+func NewStudentController(su entites.StudentUsecaseContract) *StudentController {
 	return &StudentController{
 		StudentUsecase: su,
 	}
