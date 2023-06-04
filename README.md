@@ -1,26 +1,27 @@
 # Aula
 
-## Descrição
-Esse projeto faz parte de uma série de vídeos do Canal <a href="https://www.youtube.com/channel/UCO-gQjKJ_CucLZsOX0r-S1Q">AP Tech</a> a playlist está aqui: <a href="https://www.youtube.com/playlist?list=PL7541a7wciveRSb3kBNPvGiom8tL_ebEO">PlayList</a>.
+Esse repositório é uma demonstração uma aplicação API Rest em Go, o desenvolvimento foi gravado e diponibilizado no YouTube, no Canal [AP Tech](https://www.youtube.com/@ap_tech0). A [Playlist](https://www.youtube.com/playlist?list=PL7541a7wciveRSb3kBNPvGiom8tL_ebEO) se contra nesse link, o ideal é assistir na ordem dés do começo.
 
 ## Requisitos
-- Go 1.18 ou superior
+- Docker 23.0.5 ou superior, versões anteriores podem funcionar também.
 
-## Checklist
-- [x] CRUD
-    - [x] CREATE
-    - [x] READ (GET AND LIST)
-    - [x] UPDATE
-    - [x] DELETE
-- [x] UUID
-- [X] API
-    - [X] Service
-    - [X] Validation
-    - [X] Organizar Controllers
-- [X] UseCases
-- [X] DB
-    - [X] CREATE
-    - [X] READ (GET AND LIST)
-    - [X] UPDATE
-    - [X] DELETE
-- [X] Testes
+## Commandos 
+### setup
+- irá copiar o arquivo `.env.example` e renomeando para `.env`;
+- irá subir os containers de Go e MongoBD;
+- irá iniciar a API Rest na porta 8080.
+
+ ### cover
+- Irá realizar os testes na aplicaça;
+- Após os teste irá pritnar no terminar um relatorio dos testes e suas coberturas no código.
+
+
+## Testar aplicação
+- importe o arquivo [Aula.postman_collection.json](doc/Aula.postman_collection.json) em seu [Postman](https://www.postman.com/downloads/) ou em seu [Insomnia]https://insomnia.rest/download). A collection importada terá todas as rotas mapenadas;
+
+- Execute o mando cover na sua maquina, lembrando que esse precisa ter o Golang 1.18 ou superior na sua máquina instalado.
+
+## Dúvidas, Problemas ou Sugestões
+- <b>Dúvidas</b>: pode-se usar a área de comentários nos vídeos do YouTube, mesmo que não tenha haver com o vídeo em questão;
+- <b>Problemas</b>: pode-se abrir um Issue nesse mesmo repositório, ficarei feliz em melhorar o projeto;
+- <b>Sugestões</b>: também podem ser postadas na área de comentários nos vídeos do YouTube, ou chamar em alguma das redes sóciais, os perfeis podem ser encontradas na área de Sobre em cada plataforma.

@@ -4,11 +4,13 @@ services:
   aula-app:
     container_name: aula-app
     image: golang:1.18
+    working_dir: /go/src
     volumes:
       - .:/go/src
     ports:
       - 8080:8080
     command: tail -f "/dev/null"
+
   
   aula-mongo:
     container_name: aula-mongo
