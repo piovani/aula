@@ -19,3 +19,13 @@ services:
       - .database:/data/db
     ports:
       - 27017:27017
+
+
+  aula-redis:
+    container_name: aula-redis
+    image: grokzen/redis-cluster:6.2.8
+    environment:
+      - IP=0.0.0.0
+      - INITIAL_PORT=23000
+    ports:
+      - "23000-23005:23000-23005"

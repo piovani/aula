@@ -8,7 +8,7 @@ import (
 )
 
 func (su *StudentUsecase) Delete(id uuid.UUID) error {
-	student, err := su.Database.StudentRepository.FindByID(id)
+	student, err := su.findStudent(id)
 	if err != nil {
 		return err
 	}
@@ -17,5 +17,5 @@ func (su *StudentUsecase) Delete(id uuid.UUID) error {
 		return errors.New("Não foi possivel encontrar o estudante")
 	}
 
-	return su.Database.StudentRepository.Delete(id)
+	return su.deleteStudent(id)
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/piovani/aula/api"
+	"github.com/piovani/aula/infra/cache"
 	"github.com/piovani/aula/infra/config"
 	"github.com/spf13/cobra"
 )
@@ -20,8 +21,9 @@ var Api = &cobra.Command{
 		FatalError(err)
 
 		db := GetDatabase(ctx)
+		cache := cache.NewCache()
 
-		err = api.NewService(db).Start()
+		err = api.NewService(db, cache).Start()
 		FatalError(err)
 	},
 }

@@ -10,6 +10,8 @@ type Config struct {
 
 	MongURL      string `envconfig:"MONGO_URL"`
 	MongDatabase string `envconfig:"MONGO_DATABASE"`
+
+	RedisURL string `envconfig:"REDIS_URL"`
 }
 
 var Env Config
