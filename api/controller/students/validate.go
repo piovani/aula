@@ -35,7 +35,7 @@ func getInputID(c *gin.Context) (id uuid.UUID, err error) {
 
 func getOutputListStudents(students []entites.Student) (output OutputStudents, err error) {
 	for _, s := range students {
-		outputStudent, err := getOutputStudent(s)
+		outputStudent, err := getOutputStudent(&s)
 		if err != nil {
 			return output, err
 		}
@@ -46,7 +46,7 @@ func getOutputListStudents(students []entites.Student) (output OutputStudents, e
 	return output, err
 }
 
-func getOutputStudent(student entites.Student) (output OutputStudent, err error) {
+func getOutputStudent(student *entites.Student) (output OutputStudent, err error) {
 	return OutputStudent{
 		ID:       student.ID,
 		FullName: student.FullName,

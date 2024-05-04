@@ -9,13 +9,16 @@ require (
 	github.com/gookit/validate v1.4.4
 	github.com/joho/godotenv v1.4.0
 	github.com/kelseyhightower/envconfig v1.4.0
+	github.com/redis/go-redis/v9 v9.5.1
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
 	go.mongodb.org/mongo-driver v1.10.1
 )
 
 require (
+	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect

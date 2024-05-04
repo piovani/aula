@@ -5,6 +5,6 @@ import (
 	"github.com/piovani/aula/entites"
 )
 
-func (su *StudentUsecase) SearchByID(id uuid.UUID) (entites.Student, error) {
-	return su.Database.StudentRepository.FindByID(id)
+func (su *StudentUsecase) SearchByID(id uuid.UUID) (*entites.Student, error) {
+	return su.findStudent(id)
 }
