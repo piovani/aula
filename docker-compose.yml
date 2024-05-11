@@ -1,16 +1,13 @@
-version: '3.9'
-
 services:
   aula-app:
     container_name: aula-app
-    image: golang:1.18
-    working_dir: /go/src
+    build:
+      context: ./docker/app
     volumes:
       - .:/go/src
     ports:
       - 8080:8080
-    command: tail -f "/dev/null"
-
+    command: make start
   
   aula-mongo:
     container_name: aula-mongo

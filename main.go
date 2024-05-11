@@ -1,7 +1,12 @@
 package main
 
-import "github.com/piovani/aula/cmd"
+import (
+	"fmt"
+
+	"github.com/piovani/aula/cmd"
+)
 
 func main() {
+	fmt.Println("Alguma coisa")
 	cmd.Execute()
 }
