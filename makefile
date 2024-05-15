@@ -4,7 +4,7 @@ setup:
 	docker exec aula-app go run main.go api
 
 start:
-	go run main.go
+	air api 
 
 cover:
 	go test ./... -coverprofile=covarage.out -covermode=count
