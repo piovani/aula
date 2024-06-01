@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        run: echo "building"
+      - run: echo "building"
 
