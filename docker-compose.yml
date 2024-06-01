@@ -2,7 +2,7 @@ services:
   aula-app:
     container_name: aula-app
     build:
-      context: ./docker/app
+      context: ./docker/dev
     volumes:
       - .:/go/src
     ports:
