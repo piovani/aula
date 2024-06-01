@@ -12,9 +12,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Project      
-      - run: echo "building"
+      - name: Setup Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.22.3'
-      - run: make build
+
+      - name: Build Project 
+        run: make build
