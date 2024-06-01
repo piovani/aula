@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - run: echo "building"
 
-      - name: Build Project
+      - name: Build Project      
+      - run: echo "building"
         uses: actions/setup-go@v4
         with:
           go-version: '1.22.3'
